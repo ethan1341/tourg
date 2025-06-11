@@ -252,13 +252,6 @@ interface ApiResponse<T> {
         message: string;
         details?: any;
     };
-    meta?: {
-        pagination?: {
-            page: number;
-            limit: number;
-            total: number;
-        };
-    };
 }
 ```
 
@@ -372,28 +365,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
         totalSwings: 0
     }
 }
-```
 
-2. **Collection with Pagination**:
-```typescript
-{
-    success: true,
-    data: [
-        {
-            id: '123',
-            name: 'Range Session 1',
-            shots: 50
-        }
-    ],
-    meta: {
-        pagination: {
-            page: 1,
-            limit: 10,
-            total: 45
-        }
-    }
-}
-```
 
 ### Response Helper Functions
 
