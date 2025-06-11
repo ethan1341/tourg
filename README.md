@@ -199,19 +199,7 @@ passport.deserializeUser(async (id, done) => {
    npm run dev
    ```
 
-## Type Safety
 
-The application maintains type safety through:
-1. TypeScript for static type checking
-2. Zod for runtime validation
-3. Type inference from Zod schemas to TypeScript types
-4. Mongoose types for database operations
-
-Example of type inference:
-```typescript
-type BaseClubPreset = z.infer<typeof BaseClubPresetZ>;
-type RangeSession = z.infer<typeof rangeSessionZ>;
-```
 
 ## Security
 
