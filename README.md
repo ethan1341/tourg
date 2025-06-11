@@ -129,20 +129,6 @@ passport.deserializeUser(async (id, done) => {
 });
 ```
 
-### Protected Routes
-
-Example of a protected route using session authentication:
-
-```typescript
-const authenticateSession = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.status(401).json({ message: 'Unauthorized' });
-};
-
-router.get('/club-presets', authenticateSession, getUserClubPresets);
-```
 
 ## Main Features
 
@@ -268,44 +254,6 @@ The application uses standard HTTP status codes:
 - `422 Unprocessable Entity`: Validation errors
 - `500 Internal Server Error`: Server-side error
 
-### Error Types
-
-1. **Validation Errors** (400/422):
-```typescript
-// Zod validation error response
-{
-    success: false,
-    error: {
-        code: 'VALIDATION_ERROR',
-        message: 'Invalid input data',
-        details: {
-            field: ['error message']
-        }
-    }
-}
-```
-
-2. **Authentication Errors** (401):
-```typescript
-{
-    success: false,
-    error: {
-        code: 'UNAUTHORIZED',
-        message: 'Please login to access this resource'
-    }
-}
-```
-
-3. **Resource Errors** (404):
-```typescript
-{
-    success: false,
-    error: {
-        code: 'NOT_FOUND',
-        message: 'Club preset not found'
-    }
-}
-```
 
 ### Error Handling Middleware
 
@@ -394,5 +342,22 @@ export const sendError = (
         }
     });
 };
+```
+
+``` Example of response and multilevel error handling with Enums
+export const validate = (schema: Schema)=>{
+    return (req: express.Request, res: express.Response, next: NextFunction) => {
+       if(req.body && Object.keys(req.body).length > 0){
+           try {
+               schema.parse(req.body);
+               next(); // SUCCESS - continue to route handler
+           }catch(error){
+               res.status(ResponseTypeToHttpStatus[ResponseType.VALIDATION_ERROR]).json(generateResponseObject(ResponseType.VALIDATION_ERROR))
+           }
+       }else{
+           res.status(ResponseTypeToHttpStatus[ResponseType.MISSING_BODY]).json(generateResponseObject(ResponseType.MISSING_BODY))
+       }
+    };
+}
 ```
 
