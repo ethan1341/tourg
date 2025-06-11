@@ -396,5 +396,3 @@ export const sendError = (
 };
 ```
 
-## Best Practices
-
