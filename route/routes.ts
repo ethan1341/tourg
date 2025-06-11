@@ -19,13 +19,15 @@ export const authSessionRouter = Router();
 // Auth routes
 authSessionRouter.post('/logout', auth, logout);
 
-clubPresetRouter.get('/', auth, getUserClubPresets)
-clubPresetRouter.post('/add', auth, addUserClubPreset)
-clubPresetRouter.post('/remove', auth, removeUserClubPreset)
-clubPresetRouter.post('/update', auth, updateUserClubPreset)
+// Club Preset Routes
+clubPresetRouter.get('/', auth, getUserClubPresets);
+clubPresetRouter.post('/add', auth, validate(BaseClubPresetZ), addUserClubPreset);
+clubPresetRouter.post('/remove', auth, validate(ClubPresetZ), removeUserClubPreset);
+clubPresetRouter.post('/update', auth, validate(ClubPresetZ), updateUserClubPreset);
 
-rangeSessionRouter.get('/', auth, getUserRangeSessions)
-rangeSessionRouter.post('/add', auth, addUserRangeSession)
-rangeSessionRouter.post('/remove', auth, removeUserRangeSession)
+// Range Session Routes
+rangeSessionRouter.get('/', auth, getUserRangeSessions);
+rangeSessionRouter.post('/add', auth, addUserRangeSession);
+rangeSessionRouter.post('/remove', auth, removeUserRangeSession);
 
 
