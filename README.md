@@ -192,7 +192,7 @@ passport.deserializeUser(async (id, done) => {
    - Create a Google Cloud Project
    - Configure OAuth consent screen
    - Add authorized redirect URI:
-     - `http://localhost:3000/auth/google/callback`
+     - `BASEURL/auth/google/callback`
 
 4. Run development server:
    ```bash
