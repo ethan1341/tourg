@@ -209,7 +209,6 @@ passport.deserializeUser(async (id, done) => {
 - Google OAuth integration
 - Environment variables for sensitive data
 - Secure session configuration
-- MongoDB session store
 
 ## Error and Response Handling
 
